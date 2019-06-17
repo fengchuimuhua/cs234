@@ -82,7 +82,11 @@ class LinearExploration(LinearSchedule):
         ##############################################################
         ################ YOUR CODE HERE - 4-5 lines ##################
 
-        pass
+        prob = np.random.rand()
+        if prob < self.epsilon:
+            return self.env.action_space.sample()
+        else:
+            return best_action
 
         ##############################################################
         ######################## END YOUR CODE #######################
