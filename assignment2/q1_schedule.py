@@ -34,7 +34,10 @@ class LinearSchedule(object):
         ##############################################################
         ################ YOUR CODE HERE - 3-4 lines ################## 
 
-        pass
+        if t > self.nsteps:
+            self.epsilon = self.eps_end
+        else:
+            self.epsilon = self.eps_begin + t / self.nsteps * (self.eps_end - self.eps_begin)
 
         ##############################################################
         ######################## END YOUR CODE ############## ########
