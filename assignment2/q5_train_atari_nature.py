@@ -31,12 +31,10 @@ if __name__ == '__main__':
                         overwrite_render=config.overwrite_render)
 
     # exploration strategy
-    exp_schedule = LinearExploration(env, config.eps_begin, 
-            config.eps_end, config.eps_nsteps)
+    exp_schedule = LinearExploration(env, config.eps_begin, config.eps_end, config.eps_nsteps)
 
     # learning rate schedule
-    lr_schedule  = LinearSchedule(config.lr_begin, config.lr_end,
-            config.lr_nsteps)
+    lr_schedule = LinearSchedule(config.lr_begin, config.lr_end, config.lr_nsteps)
 
     # train model
     model = NatureQN(env, config)
