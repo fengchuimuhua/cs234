@@ -54,15 +54,15 @@ class Linear(DQN):
         self.s = tf.placeholder(tf.uint8, shape=[None,
                                                  img_height,
                                                  img_width,
-                                                 nchannels * self.config.state_history], name='state')
-        self.a = tf.placeholder(tf.int32, shape=[None], name='action')
-        self.r = tf.placeholder(tf.float32, shape=[None], name='reward')
+                                                 nchannels * self.config.state_history])
+        self.a = tf.placeholder(tf.int32, shape=[None])
+        self.r = tf.placeholder(tf.float32, shape=[None])
         self.sp = tf.placeholder(tf.uint8, shape=[None,
                                                   img_height,
                                                   img_width,
-                                                  nchannels * self.config.state_history], name='next_state')
-        self.done_mask = tf.placeholder(tf.bool, shape=[None], name='done_mask')
-        self.lr = tf.placeholder(tf.float32, shape=(), name='lr')
+                                                  nchannels * self.config.state_history])
+        self.done_mask = tf.placeholder(tf.bool, shape=[None])
+        self.lr = tf.placeholder(tf.float32, shape=())
         ##############################################################
         ######################## END YOUR CODE #######################
 
@@ -150,9 +150,7 @@ class Linear(DQN):
         with tf.variable_scope(target_q_scope):
             target_q_net_vars = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
 
-        op_list = []
-        for idx in range(len(q_net_vars)):
-            op_list.append(tf.assign(target_q_net_vars[idx], q_net_vars[idx]))
+        op_list = [tf.assign(target_q_net_vars[i], q_net_vars[i]) for i in range(len(q_net_vars))]
         self.update_target_op = tf.group(*op_list)
 
         ##############################################################
