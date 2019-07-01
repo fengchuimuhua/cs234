@@ -145,10 +145,8 @@ class Linear(DQN):
         ##############################################################
         ################### YOUR CODE HERE - 5-10 lines #############
         
-        with tf.variable_scope(q_scope):
-            q_net_vars = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
-        with tf.variable_scope(target_q_scope):
-            target_q_net_vars = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES)
+        q_net_vars = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope=q_scope)
+        target_q_net_vars = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope=target_q_scope)
 
         op_list = [tf.assign(target_q_net_vars[i], q_net_vars[i]) for i in range(len(q_net_vars))]
         self.update_target_op = tf.group(*op_list)
