@@ -3,4 +3,4 @@ gym==0.10.9
 matplotlib==2.2.3
 numpy==1.14.2
 six==1.11.0
-tensorflow==1.13.1
+tensorflow==2.5.3
